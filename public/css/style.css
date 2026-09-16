@@ -1,0 +1,246 @@
+/* ============================================================
+   SKYQUEUE — visual identity: a night departure board.
+   Deep indigo runway-at-dusk background, amber gate-call accent,
+   monospace flight/seat codes (like a real split-flap board),
+   humanist sans for everything else. Boarding-pass perforation
+   motif used sparingly for ticket-like cards only.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg:        #0D1321;
+  --bg-raised: #161E33;
+  --bg-card:   #1B2440;
+  --line:      #2A3556;
+  --amber:     #F2A65A;
+  --amber-dim: #7A5A34;
+  --teal:      #5FCBB0;
+  --red:       #E8756A;
+  --text:      #EFEDE6;
+  --text-dim:  #9AA4C0;
+  --text-faint:#5C688A;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+  --font-body:    'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, #1a2340 0%, transparent 60%),
+    radial-gradient(ellipse 700px 400px at 100% 0%, #14203a 0%, transparent 55%);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+a { color: inherit; }
+
+.wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- top bar: departure-board header ---------- */
+.topbar {
+  border-bottom: 1px solid var(--line);
+  background: rgba(13, 19, 33, 0.85);
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+}
+.brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.brand .dot { color: var(--amber); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links button {
+  background: none; border: none; color: var(--text-dim);
+  font-family: var(--font-body); font-size: 14.5px; font-weight: 500;
+  cursor: pointer; padding: 6px 0; border-bottom: 2px solid transparent;
+}
+.nav-links button.active, .nav-links button:hover { color: var(--text); border-bottom-color: var(--amber); }
+.pill-btn {
+  background: var(--amber); color: #21150A; border: none;
+  font-family: var(--font-body); font-weight: 600; font-size: 14px;
+  padding: 9px 18px; border-radius: 100px; cursor: pointer;
+}
+.pill-btn:hover { filter: brightness(1.08); }
+.pill-btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+
+/* ---------- hero / search ---------- */
+.hero { padding: 56px 0 28px; }
+.hero h1 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: 40px; line-height: 1.15; max-width: 640px; margin: 0 0 10px;
+}
+.hero p { color: var(--text-dim); font-size: 16px; max-width: 520px; margin: 0 0 32px; }
+
+.search-panel {
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 14px;
+  align-items: end;
+}
+@media (max-width: 720px) { .search-panel { grid-template-columns: 1fr 1fr; } }
+
+.field label {
+  display: block; font-size: 12.5px; color: var(--text-faint);
+  margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em;
+}
+.field input {
+  width: 100%; background: var(--bg-card); border: 1px solid var(--line);
+  color: var(--text); border-radius: 8px; padding: 11px 12px;
+  font-family: var(--font-mono); font-size: 14.5px;
+}
+.field input:focus { outline: none; border-color: var(--amber); }
+
+/* ---------- flight rows: split-flap board look ---------- */
+.section-title {
+  font-family: var(--font-display); font-weight: 600; font-size: 20px;
+  margin: 44px 0 16px; display: flex; align-items: center; gap: 10px;
+}
+.section-title .count { color: var(--text-faint); font-weight: 500; font-size: 14px; }
+
+.flight-row {
+  display: grid;
+  grid-template-columns: 100px 1.4fr 110px 90px 100px auto;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background: var(--bg-card);
+}
+@media (max-width: 760px) { .flight-row { grid-template-columns: 1fr; text-align: left; } }
+
+.flight-no { font-family: var(--font-mono); font-weight: 600; color: var(--amber); font-size: 15px; }
+.route { font-family: var(--font-display); font-size: 17px; font-weight: 600; }
+.route .arrow { color: var(--text-faint); margin: 0 8px; font-weight: 400; }
+.route small { display: block; color: var(--text-faint); font-size: 12px; font-weight: 400; font-family: var(--font-body); margin-top: 2px; }
+.datetime { font-family: var(--font-mono); font-size: 13.5px; color: var(--text-dim); }
+.fare { font-family: var(--font-mono); font-size: 15px; font-weight: 600; }
+.seats-tag {
+  font-size: 11.5px; font-weight: 600; padding: 4px 10px; border-radius: 100px;
+  font-family: var(--font-mono); white-space: nowrap; justify-self: start;
+}
+.seats-tag.open { background: rgba(95,203,176,0.15); color: var(--teal); }
+.seats-tag.full { background: rgba(232,117,106,0.15); color: var(--red); }
+
+/* ---------- boarding-pass style ticket card ---------- */
+.ticket {
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: var(--bg-card);
+}
+.ticket-main { padding: 18px 20px; }
+.ticket-stub {
+  background: var(--bg-raised);
+  border-left: 2px dashed var(--line);
+  padding: 18px 16px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px;
+  position: relative;
+}
+.ticket-stub .seat-label { font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.06em; }
+.ticket-stub .seat-value { font-family: var(--font-mono); font-size: 26px; font-weight: 600; color: var(--amber); }
+.ticket-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.ticket-route { font-family: var(--font-display); font-weight: 600; font-size: 18px; }
+.ticket-meta { font-family: var(--font-mono); font-size: 13px; color: var(--text-dim); display: flex; gap: 16px; flex-wrap: wrap; margin-top: 6px; }
+.status-tag { font-size: 11.5px; font-weight: 600; padding: 3px 10px; border-radius: 100px; font-family: var(--font-mono); }
+.status-tag.Confirmed { background: rgba(95,203,176,0.15); color: var(--teal); }
+.status-tag.Cancelled { background: rgba(92,104,138,0.2); color: var(--text-faint); }
+.status-tag.Waiting { background: rgba(242,166,90,0.15); color: var(--amber); }
+.status-tag.Allocated { background: rgba(95,203,176,0.15); color: var(--teal); }
+
+/* ---------- buttons / misc ---------- */
+.btn {
+  font-family: var(--font-body); font-weight: 600; font-size: 13.5px;
+  padding: 8px 16px; border-radius: 8px; border: 1px solid var(--line);
+  background: transparent; color: var(--text); cursor: pointer;
+}
+.btn.primary { background: var(--amber); border-color: var(--amber); color: #21150A; }
+.btn.danger { border-color: rgba(232,117,106,0.4); color: var(--red); }
+.btn:hover { filter: brightness(1.1); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text-faint); }
+.empty-state .glyph { font-size: 34px; margin-bottom: 10px; }
+
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--bg-raised); border: 1px solid var(--line); color: var(--text);
+  padding: 12px 20px; border-radius: 10px; font-size: 14px; z-index: 100;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.toast.error { border-color: rgba(232,117,106,0.5); color: var(--red); }
+.toast.success { border-color: rgba(95,203,176,0.5); color: var(--teal); }
+
+/* ---------- modal ---------- */
+.overlay {
+  position: fixed; inset: 0; background: rgba(6,9,18,0.7);
+  display: flex; align-items: center; justify-content: center; z-index: 50;
+}
+.modal {
+  background: var(--bg-raised); border: 1px solid var(--line); border-radius: 14px;
+  padding: 28px; width: 380px; max-width: 90vw;
+}
+.modal h3 { font-family: var(--font-display); margin: 0 0 18px; font-size: 20px; }
+.modal .field { margin-bottom: 14px; }
+.modal .row { display: flex; gap: 10px; margin-top: 20px; }
+.modal .row button { flex: 1; }
+.modal .switch { text-align: center; margin-top: 14px; font-size: 13px; color: var(--text-faint); }
+.modal .switch a { color: var(--amber); cursor: pointer; text-decoration: underline; }
+.close-x { position: absolute; top: 18px; right: 20px; background: none; border: none; color: var(--text-faint); font-size: 18px; cursor: pointer; }
+.modal { position: relative; }
+
+footer { text-align: center; color: var(--text-faint); font-size: 13px; padding: 60px 0 40px; }
+
+/* ---------- admin ---------- */
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 40px; }
+@media (max-width: 700px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+.stat-card { background: var(--bg-card); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+.stat-card .label { font-size: 12px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+.stat-card .value { font-family: var(--font-mono); font-size: 26px; font-weight: 600; color: var(--amber); }
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; color: var(--text-faint); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+td { padding: 12px; border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: 13.5px; }
+td.name { font-family: var(--font-body); }
+.table-wrap { background: var(--bg-card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-bottom: 40px; }
+.table-wrap table { margin: 0; }
+.table-wrap .table-head { padding: 16px 18px 0; font-family: var(--font-display); font-weight: 600; font-size: 16px; }
+
+.inline-form { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 10px; padding: 18px; margin-bottom: 24px; }
+@media (max-width: 760px) { .inline-form { grid-template-columns: 1fr 1fr; } }
+.inline-form .field { margin: 0; }
+.inline-form .full { grid-column: 1 / -1; }
+
+.hidden { display: none !important; }

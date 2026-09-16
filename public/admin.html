@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SkyQueue Admin</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">Sky<span class="dot">Queue</span> <span style="color:var(--text-faint); font-size:14px; font-weight:500;">/ admin</span></div>
+      <div id="adminAuthArea"></div>
+    </div>
+  </div>
+
+  <div class="wrap" id="adminApp" style="padding-top:36px;">
+
+    <!-- login gate -->
+    <div id="adminLoginGate" style="max-width:380px; margin: 60px auto;">
+      <h3 style="font-family:var(--font-display); font-size:22px;">Admin sign-in</h3>
+      <div class="field" style="margin-bottom:14px;"><label>Email</label><input id="adminEmail" type="email" value="admin@airline.com" /></div>
+      <div class="field" style="margin-bottom:14px;"><label>Password</label><input id="adminPassword" type="password" value="admin123" /></div>
+      <button class="btn primary" style="width:100%;" onclick="adminLogin()">Sign in</button>
+      <p style="color:var(--text-faint); font-size:13px; margin-top:14px;">Demo credentials are pre-filled.</p>
+    </div>
+
+    <!-- dashboard (hidden until login) -->
+    <div id="adminDashboard" class="hidden">
+
+      <div class="stat-grid">
+        <div class="stat-card"><div class="label">Total flights</div><div class="value" id="statFlights">—</div></div>
+        <div class="stat-card"><div class="label">Confirmed bookings</div><div class="value" id="statBookings">—</div></div>
+        <div class="stat-card"><div class="label">Standby waiting</div><div class="value" id="statStandby">—</div></div>
+        <div class="stat-card"><div class="label">Revenue collected</div><div class="value" id="statRevenue">—</div></div>
+      </div>
+
+      <div class="section-title">Add a new flight</div>
+      <div class="inline-form">
+        <div class="field"><label>Flight no.</label><input id="fFlightNo" placeholder="AI-505" /></div>
+        <div class="field"><label>Source</label><input id="fSource" placeholder="Pune" /></div>
+        <div class="field"><label>Destination</label><input id="fDest" placeholder="Hyderabad" /></div>
+        <div class="field"><label>Fare (₹)</label><input id="fFare" type="number" value="3500" /></div>
+        <div class="field"><label>Date</label><input id="fDate" type="date" /></div>
+        <div class="field"><label>Time</label><input id="fTime" type="time" value="09:00" /></div>
+        <div class="field"><label>Total seats</label><input id="fSeats" type="number" value="6" /></div>
+        <div class="field full"><button class="btn primary" onclick="addFlight()">Add flight</button></div>
+      </div>
+
+      <div class="table-wrap">
+        <div class="table-head">Flights</div>
+        <table><thead><tr><th>No.</th><th>Route</th><th>Date</th><th>Seats</th><th>Fare</th><th>Status</th></tr></thead>
+        <tbody id="flightsTbody"></tbody></table>
+      </div>
+
+      <div class="table-wrap">
+        <div class="table-head">Bookings</div>
+        <table><thead><tr><th>ID</th><th>Passenger</th><th>Flight</th><th>Seat</th><th>Status</th></tr></thead>
+        <tbody id="bookingsTbody"></tbody></table>
+      </div>
+
+      <div class="table-wrap">
+        <div class="table-head">Standby queues</div>
+        <table><thead><tr><th>#</th><th>Passenger</th><th>Flight</th><th>Status</th></tr></thead>
+        <tbody id="standbyTbody"></tbody></table>
+      </div>
+
+      <div class="table-wrap">
+        <div class="table-head">Audit log <span style="color:var(--text-faint); font-weight:400; font-size:13px;">(trigger-generated)</span></div>
+        <table><thead><tr><th>Time</th><th>Table</th><th>Action</th><th>Details</th></tr></thead>
+        <tbody id="auditTbody"></tbody></table>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="toastHost"></div>
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SkyQueue — Standby-Smart Flight Booking</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">Sky<span class="dot">Queue</span></div>
+      <div class="nav-links">
+        <button data-view="search" class="active">Search flights</button>
+        <button data-view="dashboard">My bookings</button>
+      </div>
+      <div id="authArea"></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ============ SEARCH VIEW ============ -->
+    <section id="view-search">
+      <div class="hero">
+        <h1>Never lose a seat to a full flight again.</h1>
+        <p>Search routes, book instantly, or join the standby queue — if a confirmed seat opens up, it's allocated to you automatically, no manual waiting.</p>
+        <div class="search-panel">
+          <div class="field"><label>From</label><input id="srcInput" placeholder="Mumbai" /></div>
+          <div class="field"><label>To</label><input id="dstInput" placeholder="Delhi" /></div>
+          <div class="field"><label>Date</label><input id="dateInput" type="date" /></div>
+          <button class="btn primary" onclick="searchFlights()">Search</button>
+        </div>
+      </div>
+
+      <div class="section-title">Available flights <span class="count" id="resultCount"></span></div>
+      <div id="flightList"></div>
+    </section>
+
+    <!-- ============ DASHBOARD VIEW ============ -->
+    <section id="view-dashboard" class="hidden">
+      <div class="hero" style="padding-top:40px;">
+        <h1 style="font-size:30px;">My bookings &amp; standby status</h1>
+      </div>
+
+      <div class="section-title">Confirmed &amp; cancelled bookings</div>
+      <div id="bookingList"></div>
+
+      <div class="section-title">Standby queue position</div>
+      <div id="standbyList"></div>
+    </section>
+
+  </div>
+
+  <footer>SkyQueue — a DBMS mini-project demo. Not a real airline. &nbsp;·&nbsp; <a href="admin.html">Admin panel</a></footer>
+
+  <div id="toastHost"></div>
+
+  <!-- ============ AUTH MODAL ============ -->
+  <div id="authOverlay" class="overlay hidden">
+    <div class="modal">
+      <button class="close-x" onclick="closeAuth()">&times;</button>
+
+      <div id="loginForm">
+        <h3>Log in to book</h3>
+        <div class="field"><label>Email</label><input id="loginEmail" type="email" /></div>
+        <div class="field"><label>Password</label><input id="loginPassword" type="password" /></div>
+        <div class="row"><button class="btn primary" onclick="doLogin()">Log in</button></div>
+        <div class="switch">New here? <a onclick="showRegister()">Create an account</a></div>
+      </div>
+
+      <div id="registerForm" class="hidden">
+        <h3>Create your account</h3>
+        <div class="field"><label>Full name</label><input id="regName" /></div>
+        <div class="field"><label>Phone</label><input id="regPhone" /></div>
+        <div class="field"><label>Email</label><input id="regEmail" type="email" /></div>
+        <div class="field"><label>Password</label><input id="regPassword" type="password" /></div>
+        <div class="row"><button class="btn primary" onclick="doRegister()">Register</button></div>
+        <div class="switch">Already registered? <a onclick="showLogin()">Log in</a></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
